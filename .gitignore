@@ -1,0 +1,12 @@
+## dataset:
+aclImdb/**
+
+## idea:
+.idea/**
+*.iws
+**/__pycache__/**
+
+## model
+trained_model/**
+
+**/.directory

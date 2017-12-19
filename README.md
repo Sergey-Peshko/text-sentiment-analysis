@@ -23,11 +23,11 @@ use freeze.py script to freeze your model to use it in your purpose in another p
 This script will produce file model.pb in trained_model folder.
 * Input tensor: "x:0"
 * Output tensor: "y_pred:0"
-You can check how to import this frozen model in java by example in [this repository](https://github.com/PROteinBY/text-polarity)
+<br/>You can check how to import this frozen model in java by example in [this repository](https://github.com/PROteinBY/text-polarity)
 
 ### Try your example
 If you want to check model by your example use scripts:
 * predict_from_frozen_model.py
 * predict_from_std_model.py
-text which you want recognise put in text variable for both of this scripts
+<br/>text which you want recognise put in text variable for both of this scripts
 

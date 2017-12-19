@@ -5,6 +5,9 @@ import tensorflow as tf
 from datasetutils import get_input_vector
 
 
+text = "good film"
+
+
 def load_graph(trained_model):
     with tf.gfile.GFile(trained_model, "rb") as f:
         graph_def = tf.GraphDef()
@@ -40,4 +43,4 @@ def predict(text):
     print(result)
 
 
-predict(text="good film")
+predict(text)

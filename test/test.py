@@ -17,7 +17,6 @@ images = np.array(images, copy=False)
 labels = np.array(labels, copy=False)
 neg_dataset = DataSet(images, labels)
 
-
 images, labels = load_class(os.path.join("../aclImdb/test/", "prepared_test_pos"), len(vocab))
 images = np.array(images, copy=False)
 labels = np.array(labels, copy=False)
@@ -48,8 +47,8 @@ def test():
 
     accuracy = tf.reduce_mean(tf.cast(tf.equal(y_pred, y_true), tf.float32))
 
-    print(pos_data_accuracy_manager.calc_accuracy(accuracy))
-    print(neg_data_accuracy_manager.calc_accuracy(accuracy))
+    print("Positive accuracy: {}\n".format(pos_data_accuracy_manager.calc_accuracy(accuracy)))
+    print("Negative accuracy: {}\n".format(neg_data_accuracy_manager.calc_accuracy(accuracy)))
 
 
 test()

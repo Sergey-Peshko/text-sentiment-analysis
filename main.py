@@ -19,6 +19,11 @@ from tensorflow.python.framework import ops
 from datasetutils import read_train_sets
 from trainutils import train
 
+number_epoch = 10000
+learning_rate = 0.00001
+alpha_val = 0.0001
+batch_size = 1
+
 ops.reset_default_graph()
 
 # Create graph
@@ -26,9 +31,6 @@ sess = tf.Session()
 
 # Load the data
 data_sets, num_inputs = read_train_sets("./aclImdb/train", "prepared_ned", "prepared_pos", "aclImdb/imdb.vocab", 0.1)
-
-# Declare batch size
-batch_size = 1
 
 # Initialize placeholders
 x_data = tf.placeholder(shape=[None, num_inputs], dtype=tf.float32, name="x")
@@ -47,7 +49,7 @@ l2_norm = tf.reduce_sum(tf.square(A))
 # Declare loss function
 # Loss = max(0, 1-pred*actual) + alpha * L2_norm(A)^2
 # L2 regularization parameter, alpha
-alpha = tf.constant([0.0001])
+alpha = tf.constant([alpha_val])
 # Margin term in loss
 classification_term = tf.reduce_mean(tf.maximum(0., tf.subtract(1., tf.multiply(model_output, y_target))))
 # Put terms together
@@ -58,7 +60,7 @@ prediction = tf.sign(model_output, name="y_pred")
 accuracy = tf.reduce_mean(tf.cast(tf.equal(prediction, y_target), tf.float32))
 
 # Declare optimizer
-my_opt = tf.train.AdamOptimizer(0.00001)
+my_opt = tf.train.AdamOptimizer(learning_rate=learning_rate)
 train_step = my_opt.minimize(loss)
 
 # Initialize variables
@@ -67,7 +69,7 @@ sess.run(init)
 
 report_file_name = datetime.datetime.fromtimestamp(time.time()).strftime('%m-%d_%H+%M+%S')
 
-train(epoch_amount=10000,
+train(epoch_amount=number_epoch,
       data=data_sets,
       session=sess,
       x=x_data,
